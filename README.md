@@ -4,12 +4,14 @@
 
 Emoji Hunter is a small web project that utilizes [Open Emoji API](https://emoji-api.com/emojis). The main idea behind it was to learn about the foundations of asynchronous programming in Python programming language - [coroutines](https://docs.python.org/3/library/asyncio-task.html) and [generators](https://docs.python.org/3/howto/functional.html).
 
-### Desktop and mobile views
+### Mobile & Desktop views
 
-<p>
-  <img src="docs/img/view-desktop.png" alt="Desktop View" width="800">
-  <img src="docs/img/view-mobile.png" alt="Mobile View" width="200">
-</p>
+<table>
+  <tr>
+    <td><img src="docs/img/view-mobile.png" alt="Mobile View" /></td>
+    <td><img src="docs/img/view-desktop.png" alt="Desktop View" /></td>
+  </tr>
+</table>
 
 ### Technologies required
 

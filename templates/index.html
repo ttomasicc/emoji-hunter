@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Emoji Hunter</title>
+    <link rel="icon" type="image/x-icon" href="../static/img/favicon.png"/>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="Search any emoji by keywords"/>
+    <meta name="keywords" content="Emoji, search"/>
+    <meta name="author" content="Tin Tomašić"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!--  Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <!-- Custom JS -->
+    <script src="../static/js/script.min.js"></script>
+</head>
+<body>
+<main>
+    <div class="container">
+        <!-- Jumbotron -->
+        <div class="p-5 text-center bg-image rounded-3"
+             style="background-image: url('https://c4.wallpaperflare.com/wallpaper/988/676/6/cool-emoji-icon-computer-art-wallpaper-preview.jpg'); height: auto;">
+            <div class="mask" style="background-color: rgba(0,0,0,0.74);">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <div class="text-white">
+                        <h1 class="mt-4 mb-3">Ahoy there brave emoji hunter!</h1>
+                        <h4 class="p-2">Please, feel free to enter your beloved wishes</h4>
+                        <form class="mb-4 pl-2 pr-2" method="get" action="/">
+                            <div class="form-group p-2">
+                                {% if query %}
+                                <input type="text" class="form-control" id="query" placeholder="Emoji keywords"
+                                       name="query" value="{{ query }}">
+                                {% else %}
+                                <input type="text" class="form-control" id="query" placeholder="Emoji keywords"
+                                       name="query">
+                                {% endif %}
+                            </div>
+                            <input type="submit" value="Search" class="btn btn-lg btn-outline-light btn-lg m-3"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Jumbotron -->
+
+        <!-- Results Table-->
+        {% if emojis %}
+        <h3 class="ml-3 mt-3">Here you go</h3>
+        <div class="table-responsive">
+            <table id="results" class="m-3 table table-hover table-sm">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Emoji</th>
+                    <th scope="col">Unicode Name</th>
+                    <th scope="col">Group</th>
+                    <th scope="col">Subgroup</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for emoji in emojis %}
+                    {% if loop.index % 2 == 0 %}
+                        {% set classes = 'table-primary' %}
+                    {% else %}
+                        {% set classes = 'table-light' %}
+                    {% endif %}
+                    <tr class="{{ classes }}">
+                        <td>{{ loop.index }}</td>
+                        <td style="cursor: pointer">{{ emoji.character }}</td>
+                        <td>{{ emoji.unicodeName }}</td>
+                        <td>{{ emoji.group }}</td>
+                        <td>{{ emoji.subGroup }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+        <!-- Results Table-->
+
+        <!-- Flexbox container for aligning the toasts -->
+        <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="display: none;">
+            <!-- Then put toasts within -->
+            <div id="toast" style="position: fixed; top: 10px" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                <div id="toast-body" class="toast-body">Emoji successfully copied!</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="text-center text-lg-start bg-light text-muted">
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        <a class="text-reset fw-bold pb-1" href="https://en.wikipedia.org/wiki/MIT_License/" target="_blank"><img src="../static/img/mit-logo.png" height="16"></a>
+        © 2022 Copyright:
+        <a class="text-reset fw-bold" href="https://www.linkedin.com/in/tintomasic/" target="_blank">Tin Tomašić</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+
+</body>
+</html>
